@@ -1,0 +1,55 @@
+,User,Movie,Rating,Clean_Rating
+0,Alice,Star Wars,5,5.0
+1,Frank,The Godfather,4,4.0
+2,Bob,Titanic,5,5.0
+3,Carol,The Matrix,3,3.0
+4,Dave,Inception,2,2.0
+5,Emily,Pulp Fiction,4,4.0
+6,Quincy,Star Wars,5,5.0
+7,Bob,Star Wars,2,2.0
+8,Frank,Forrest Gump,3,3.0
+9,Alice,The Matrix,4,4.0
+10,Paul,Titanic,4,4.0
+11,Carol,Inception,5,5.0
+12,Dave,Titanic,4,4.0
+13,Emily,The Godfather,5,5.0
+14,Alice,Inception,3,3.0
+15,Paul,The Godfather,5,5.0
+16,Carol,Pulp Fiction,4,4.0
+17,Ivy,Star Wars,5,5.0
+18,Emily,Forrest Gump,3,3.0
+19,Quincy,The Matrix,4,4.0
+20,Ivy,The Matrix,4,4.0
+21,Paul,Inception,1,1.0
+22,Bob,The Godfather,4,4.0
+23,Frank,Star Wars,5,5.0
+24,Ivy,Inception,3,3.0
+25,Dave,Forrest Gump,5,5.0
+26,Quincy,Inception,3,3.0
+27,Karen,The Matrix,3,3.0
+28,Leo,Titanic,4,4.0
+29,Mia,The Godfather,5,5.0
+30,Nina,Star Wars,5,5.0
+31,Oscar,The Matrix,4,4.0
+32,Sarah,Star Wars,5x,5.0
+33,Tom,Pulp Fiction,Five,5.0
+34,Karen,Inception,5,5.0
+35,Leo,Inception,2,2.0
+36,Mia,Pulp Fiction,4,4.0
+37,Nina,The Godfather,4,4.0
+38,Oscar,Pulp Fiction,2,2.0
+39,Sarah,Inception,4,4.0
+40,Wendy,Pulp Fiction,4,4.0
+41,Zane,Pulp Fiction,3.5,3.5
+42,Uma,Titanic,5,5.0
+43,Wendy,The Matrix,3.5,3.5
+44,Xander,Forrest Gump,5,5.0
+45,Yara,Inception,5y,5.0
+46,Zane,Forrest Gump,3.5,3.5
+47,Uma,Star Wars,2?,2.0
+48,Karen,Pulp Fiction,4,4.0
+49,Leo,Forrest Gump,5,5.0
+50,Mia,Forrest Gump,3,3.0
+51,Nina,Forrest Gump,3,3.0
+52,Oscar,Forrest Gump,5,5.0
+53,Zane,Star Wars,4,4.0
