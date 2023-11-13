@@ -9,12 +9,12 @@ import numpy as np
 @click.option("--name", "-n",
                help="Name of Person",
                required=True,
-               prompt="Your name, please?\n")
+               prompt="Your name, please? OR You can select one of these names to give you a preview of what to expect----> Alice, Frank, Bob, Carol, Dave\n")
 def supercli(name):
     '''
     This prints "Hello, {name}"
-    '''
-   
+    '''     
+    ##Cleaning the dataset and resetting the index
     movies = pd.read_csv("data.txt")
     movies["Clean_Rating"] = movies["Rating"].str.replace("Five", "5", regex=True)
     movies["Clean_Rating"] = movies["Clean_Rating"].str.replace(r'[^0-9,.]', '', regex=True)
@@ -22,28 +22,32 @@ def supercli(name):
     movies["Clean_Rating"] = movies["Clean_Rating"].fillna(0)
     movies = movies.reset_index(drop=True)
 
-    # vectorizer = TfidfVectorizer(ngram_range=(1,2))
-    # tfidf = vectorizer.fit_transform(movies["Movie"])
+    ##Creating Search Algorithm for user and movie to take into account characters from input to optimize searches
+    #### Movie Search Algorithm
+    vectorizer = TfidfVectorizer(ngram_range=(1,2))
+    tfidf = vectorizer.fit_transform(movies["Movie"])
 
-    # def search(title):
-    #     # title = "Fiction"
-    #     query_vec = vectorizer.transform([title])
-    #     similarity = cosine_similarity(query_vec, tfidf).flatten()
-    #     indices = np.argpartition(similarity, -5)[-5:]
-    #     results = movies.iloc[indices][::-1]
-    #     return results
+    def search_movie(title):
+        query_vec = vectorizer.transform([title])
+        similarity = cosine_similarity(query_vec, tfidf).flatten()
+        indices = np.argpartition(similarity, -5)[-5:]
+        movie_results = movies.iloc[indices][::-1]
+        return movie_results
     
+    ### User Search Algorithm
     vectorizer2 = TfidfVectorizer(ngram_range=(1,2))
     tfidf2 = vectorizer2.fit_transform(movies["User"])
 
     def search_user(user):
-        query_vec = vectorizer2.transform([user])
-        similarity = cosine_similarity(query_vec, tfidf2).flatten()
+        query_vec2 = vectorizer2.transform([user])
+        similarity = cosine_similarity(query_vec2, tfidf2).flatten()
         indices = np.argpartition(similarity, -5)[-10:]
-        results = movies.iloc[indices][::-1]
-        return results
-    
+        user_results = movies.iloc[indices][::-1]
+        return user_results
+
     movies["Clean_Rating"] = movies["Clean_Rating"].astype(float)
+
+    # Functions that recommend movies to the user and finding similar movies respectively
 
     def user_recommended_movies(user):
         # user_2 = "Frank
@@ -83,8 +87,30 @@ def supercli(name):
 
         return similar_user_recs
     
-    if len(user_recommended_movies(name)) > 0:
-        print(user_recommended_movies(name))
+    ## Output on terminal
+
+    input_name_results = search_user(name)
+    user = input_name_results.iloc[0]["User"]
+    if len(user_recommended_movies(name)) > 0 and len(name) > 2:
+        # print()
+        click.echo(user_recommended_movies(name))
+    elif len(name) < 2:
+        # print()
+        click.echo(f"Length of {name} is less than 2 characters")
+    elif user.lower() == name.lower():
+        # print()
+        click.echo(user_recommended_movies(user))
     else:
-        for mo in movie_list:
-            print(find_similar_movie(mo))
+        movie_name = click.prompt("Please select one of these movies and get recommendations that are similar ----> Star Wars,The Godfather,Titanic,The Matrix,Inception,Pulp Fiction,Forrest Gump")
+        if len(movie_name) < 2:
+            # print()
+            click.echo(f"Length of {movie_name} is less than 2 characters")
+        else:
+            results = search_movie(movie_name)
+            movie_result = results.iloc[0]["Movie"]
+            # print()
+            click.echo(find_similar_movie(movie_result))
+
+if __name__ == '__main__':
+    supercli()
+ 
