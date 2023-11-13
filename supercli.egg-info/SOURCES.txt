@@ -1,0 +1,7 @@
+setup.py
+supercli.egg-info/PKG-INFO
+supercli.egg-info/SOURCES.txt
+supercli.egg-info/dependency_links.txt
+supercli.egg-info/entry_points.txt
+supercli.egg-info/requires.txt
+supercli.egg-info/top_level.txt
