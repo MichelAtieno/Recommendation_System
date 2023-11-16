@@ -5,7 +5,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
-@click.command()
+@click.group()
+def main():
+    pass
+
+@main.command()
 @click.option("--name", "-n",
                help="Name of Person",
                required=True,
@@ -103,5 +107,5 @@ def supercli(name):
             click.echo(find_similar_movies(movie_result))
 
 if __name__ == '__main__':
-    supercli()
+    main()
  

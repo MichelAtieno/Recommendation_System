@@ -15,10 +15,9 @@ Proof of concept movie recommendation system using collaborative filtering.
     - The second option is to run the command "python supercli.py", which will prompt you to input a name and next steps are similar to the process above.
     
 
-## Set-up and Installation
-###     Prerequisites
-        - Python 3.10.6
-        - Click Library           
+### Information on Data Analysis and Data Cleaning
+For further reference/insight done on sample data, you can check ou the file here: [Data Cleaning and Analysis](./Data_Analysis.ipynb) 
+
 
 ###  Known bugs
 *** Recommendation system can be improved.
