@@ -2,7 +2,7 @@
 ### By Michel Atieno, created on November 2023.
 
 ### Description
-Proof of concept movie recommendation system
+Proof of concept movie recommendation system using collaborative filtering.
 
 
 ### How to load CLI locally to test prototype recommendation system
@@ -10,8 +10,8 @@ Proof of concept movie recommendation system
     - Go into directory, on the root of the project where all the files are located. Activate the virtual environment using the command "source virtual/bin/activate". This will allow you to use the packages/libraries required for the project. You can also download the packages which are available in the requirements.txt file using the command "pip install -r requirements.txt". Once you have activated the virtual enviroment and all packages required have been installed, you will be able to run the project on the Command Line.
 
     You can run the project in two ways on the Command Line: 
-    - You can type the command "super", which will prompt you to input a name. There are examples of names highlighted on the prompt(from the sample data provided), which you can use to test the output. If you input a name which is not in the examples provided, a prompt will be provided with examples of movie names, where you can input a movie name and recommendations will be provided accordingly.
-    - The second option is to type the command "python supercli.py", which will prompt you to input a name and next steps are similar to the process above.
+    -Run the command "super", which will prompt you to input a name. There are examples of names highlighted on the prompt(from the sample data provided), which you can use to test the output. If you input a name which is not in the examples provided, a prompt will be provided with examples of movie names, where you can input a movie name and recommendations will be provided accordingly.
+    - The second option is to run the command "python supercli.py", which will prompt you to input a name and next steps are similar to the process above.
     
 
 ## Set-up and Installation
