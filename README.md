@@ -16,7 +16,7 @@ Proof of concept movie recommendation system using collaborative filtering.
     
 
 ### Information on Data Analysis and Data Cleaning
-For further reference/insight done on sample data, you can check ou the file here: [Data Cleaning and Analysis](./Data_Analysis.ipynb) 
+For further reference/insight done on sample data, you can check the file here: [Data Cleaning and Analysis](./Data_Analysis.ipynb) 
 
 
 ###  Known bugs
