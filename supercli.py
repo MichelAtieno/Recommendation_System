@@ -5,6 +5,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
+from rich.console import Console
+from rich.table import Table
+
 @click.group()
 def main():
     pass
@@ -64,10 +67,12 @@ def supercli(name):
         similar_user_recs = movies[(movies["User"].isin(users_watching_similar_movies["User"])) & (movies["Clean_Rating"] >= 3)][["Movie", "User"]]
         user_recs = similar_user_recs[(similar_user_recs["User"] != user)]["Movie"].unique()
         # similar_user_recs
-        user_recs_df = pd.DataFrame(user_recs.tolist(), columns=["'s Recommended Movies"])
-        user_recs_df = user_recs_df.add_prefix(user)
+        # user_recs_df = pd.DataFrame(user_recs.tolist(), columns=["'s Recommended Movies"])
+        # user_recs_df = user_recs_df.add_prefix(user)
+
+        # user_recs_df = pd.DataFrame(user_recs.tolist())
         
-        return user_recs_df
+        return user_recs.tolist()
    
     def find_similar_movies(movie):
         #Finding recommendations from similar users
@@ -81,30 +86,56 @@ def supercli(name):
         movie_recs_df = pd.DataFrame(similar_user_recs)
         movie_recs_df = movie_recs_df.drop(columns="count")
         movie_recs_df.reset_index(inplace=True)
-        movie_recs_df = movie_recs_df.rename(columns = {'Movie':'Movies similar to '})
-        movie_recs_df = movie_recs_df.add_suffix(movie)
-        movie_recs_df = movie_recs_df[1:].reset_index(drop=True)
+        # movie_recs_df = movie_recs_df.rename(columns = {'Movie':'Movies similar to '})
+        # movie_recs_df = movie_recs_df.add_suffix(movie)
+        # movie_recs_df = movie_recs_df[1:].reset_index(drop=True)
         
-        return movie_recs_df
+        return movie_recs_df["Movie"][1:].tolist()
     
     ## Output on terminal
+    console = Console()
 
     input_name_results = search_user(name)
     user = input_name_results.iloc[0]["User"]
     if len(user_recommended_movies(name)) > 0 and len(name) > 2:
-        click.echo(user_recommended_movies(name))
+        # click.echo(user_recommended_movies(name))
+        user_movies = user_recommended_movies(name)
+        table_title = f"{name}'s recommended movies"
+        table = Table()
+        table.add_column(table_title, style="green")
+        for i in user_movies:
+            table.add_row(i)
+        console.print(table)
     elif len(name) < 2:
-        click.echo(f"Length of {name} is less than 2 characters")
+        # click.echo(f"Length of {name} is less than 2 characters")
+        print(f"Length of {name} is less than 2 characters")
     elif user.lower() == name.lower():
-        click.echo(user_recommended_movies(user))
+        # click.echo(user_recommended_movies(user))
+        user_movies = user_recommended_movies(user)
+        table_title = f"{user}'s recommended movies"
+        table = Table()
+        table.add_column(table_title, style="green")
+        for i in user_movies:
+            table.add_row(i)
+        console.print(table)
     else:
-        movie_name = click.prompt("Please select one of these movies and get recommendations that are similar ----> Star Wars,The Godfather,Titanic,The Matrix,Inception,Pulp Fiction,Forrest Gump")
+        movie_name = click.prompt("Please select one of these movies and get recommendations that are similar ----> Star Wars, The Godfather, Titanic, The Matrix, Inception, Pulp Fiction, Forrest Gump")
         if len(movie_name) < 2:
-            click.echo(f"Length of {movie_name} is less than 2 characters")
+            # click.echo(f"Length of {movie_name} is less than 2 characters")
+            print(f"Length of {movie_name} is less than 2 characters")
         else:
             results = search_movie(movie_name)
             movie_result = results.iloc[0]["Movie"]
-            click.echo(find_similar_movies(movie_result))
+            # click.echo(find_similar_movies(movie_result))
+            recommended_movies = find_similar_movies(movie_result)
+            # print(recommended_movies)
+            table_title = f"Similar Movies to {movie_name}"
+            table = Table()
+            table.add_column(table_title, style="green")
+            for i in recommended_movies:
+                table.add_row(i)
+                
+            console.print(table)
 
 if __name__ == '__main__':
     main()
